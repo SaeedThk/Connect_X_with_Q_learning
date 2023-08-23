@@ -26,11 +26,7 @@ A Markov decision process is a 4-tuple  $(S,A,P,R)$ , where as shown the figure 
 
 <img src='MDP.jpg' width='500'>
 The goal of Markov decision processes is to find a policy for the decision maker by maximizing the sum of the rewards over all time steps
-
-$
-$
-
-
+<img src='Eq1.png' width='300'>
 
 In this article, we discuss two approaches to create a reinforcement learning agent to play and win the game.
 
@@ -38,20 +34,26 @@ In this article, we discuss two approaches to create a reinforcement learning ag
 
 The fundamental concept of Q-Learning is to map out the full observation space and then record the agent's behaviors inside that map. The agent will then incrementally adjust its prior action based on whether it received a good or negative reward each time it comes across the same observation. A Q-Table is a type of data structure that stores the prior actions for each observation in the observation space. The Q-Learning equation shown below is most frequently used to perform this incremental updating of the Q-Table:
 
-
-$
-$
+<img src='Eq2.png' width='500'>
 
 where  $r_t$  is the reward received when moving from the state  $s_t$  to the state  $s_{t+1}$ , and  $\alpha$  is the learning rate  $0<\alpha<1$. The discount factor $\gamma$ determines the importance of future rewards.
 
 The trade-off between exploration and exploitation is one difficulty that reinforcement learning faces that other types of learning do not. A reinforcement learning agent must favor activities that it has previously done and proven to be effective in creating reward if it wants to reap a large amount of reward. However, it must try actions that it has never chosen before in order to find such actions. The agent must take advantage of its past experiences in order to profit, but it must also investigate in order to choose better future courses of action.\cite{trade_off-RL1}
 To explore the state space of action $a_t$ in the learning process we define a Epsilon-greedy policy such that:
 
-$
-$
+<img src='Eq3.png' width='500'>
 
 The most important concept is to teach two players at once. Another important distinction is that the award is contingent upon the success or failure of the opposing player. Player One's action should be rewarded if it resulted in the elimination of Player Two.
 To do so we follow the procedure in Algorithm1:
-<img src='Algorithm1.png' width='300'>
 
+<img src='Algorithm1.png' width='500'>
+
+### Results
+We defined the board as a $6 \times 7$ (6 rows and 7 columns) and 42 cells. Therefore an action can take a value between 1 and 7. And the state set has 42 values. So both Q-table will be a matrix of $42\times7$. The agent can be expressed as its location on the board.
+With the board defined we follow the procedure in Algorithm1 and calculated the Q-table after 10000 number of plays and $\epsilon = 0.3$. 
+
+As a result, we have got $59.97\%$ winning when the Q-learning agent has played against a random player. As you see this number is a bit close to our randomness percentage which is 30\%. 
+Since Connect Four is a solved game. this clearly shows that Q-learning hasn't done a very good job. 
+
+<img src='Q-tables.png' width='800'>
 
